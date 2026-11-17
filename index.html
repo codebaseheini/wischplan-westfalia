@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<title>Maschine fahren</title>
+<style>
+  :root { --bg:#fff; --fg:#1a1a1a; --muted:#666; --card:#f3f3f1; --line:#ddd; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#1b1b1a; --fg:#f0f0ee; --muted:#a0a09a; --card:#262625; --line:#3a3a38; }
+  }
+  * { box-sizing:border-box; }
+  html, body { margin:0; }
+  body { background:var(--bg); color:var(--fg); font-family:system-ui,sans-serif; line-height:1.35; }
+
+  /* ---- Basis: Handy und kleine Fenster (einspaltig, scrollbar) ---- */
+  .wrap { max-width:34rem; margin:0 auto; padding:1.25rem 1rem 2rem; }
+  h1 { font-size:1.4rem; font-weight:500; margin:0; }
+  .grp h3 { font-size:.95rem; font-weight:500; color:var(--muted); margin:0 0 .4rem; }
+  .grp + .grp { margin-top:1rem; }
+  h2 { font-size:1.05rem; font-weight:500; margin:1.5rem 0 .5rem; }
+  .name { background:var(--card); border-radius:12px; padding:.9rem 1.1rem;
+          font-size:1.3rem; margin:0 0 .6rem; }
+  .regel { color:var(--muted); font-size:.9rem; margin:0 0 .5rem; }
+  ul { list-style:none; margin:0; padding:0; }
+  .rank li { display:grid; grid-template-columns:minmax(0,1fr) 30% 2.5rem; gap:.75rem;
+             align-items:center; border-top:1px solid var(--line); padding:.4rem 0; }
+  .rank .n { text-align:right; }
+  .bar { background:var(--fg); height:.5rem; border-radius:4px; opacity:.35; }
+  .rank li.heute .nm { font-weight:600; }
+  .mk { color:var(--muted); font-weight:400; }
+  .hist li { border-top:1px solid var(--line); padding:.4rem 0; }
+  .hist span { color:var(--muted); display:block; font-size:.85rem; }
+
+  /* ---- Grosser Bildschirm: alles auf einer Seite, kein Scrollen ---- */
+  @media (min-width:960px) and (min-height:540px) {
+    html, body { height:100%; overflow:hidden; }
+    .wrap { max-width:none; height:100dvh; padding:2.5vh 2.5vw; display:grid;
+            grid-template-columns:minmax(0,1fr) minmax(0,2.2fr) minmax(0,1fr);
+            grid-template-rows:auto minmax(0,1fr); column-gap:2.5vw; row-gap:2vh;
+            font-size:clamp(.72rem, 2vh, 1.05rem); }
+    header { grid-column:1 / -1; display:flex; align-items:baseline; gap:1.5rem; }
+    h1 { font-size:clamp(1.2rem, 4vh, 2rem); }
+    .grp h3 { font-size:.95em; margin:0 0 .6vh; }
+    .grp + .grp { margin-top:1.6vh; }
+    h2 { font-size:1.1em; margin:0 0 1vh; }
+    section { min-height:0; display:flex; flex-direction:column; overflow:hidden; }
+    .name { font-size:clamp(.95rem, 2.8vh, 1.4rem); padding:1.3vh 1.2vw; margin:0 0 1vh; }
+    .regel { font-size:.85em; margin:0 0 1vh; }
+    .rank { flex:1; min-height:0; display:grid; grid-auto-flow:column;
+            grid-template-rows:repeat(var(--rows), minmax(0,1fr)); column-gap:2.5vw; }
+    .rank li { padding:0; gap:.6rem; grid-template-columns:minmax(0,1fr) 18% 2.2rem; }
+    .mk { display:none; }
+    .rank .nm { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .hist { flex:1; min-height:0; overflow:hidden; }
+    .hist li { padding:.8vh 0; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Maschine fahren</h1>
+</header>
+<section>
+  <h2>Diese Woche dran</h2>
+  <div class="grp"><h3>Training · Do 19.11.2026</h3>
+<p class="name">Bastian E.</p>
+<p class="name">Bastian S.</p>
+<p class="name">Hannes W.</p></div>
+
+</section>
+<section>
+  <h2>Wie oft schon gewischt</h2>
+  <p class="regel">Wer bisher am seltensten gewischt hat, kommt zuerst dran. Bei gleichem Stand entscheidet der Zufall.</p>
+  <ul class="rank" style="--rows:9"><li class="heute"><span class="nm">Bastian E. <span class="mk">(diese Woche dran)</span></span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li><span class="nm">Gianluca S.</span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li><span class="nm">Janis H.</span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li><span class="nm">Jannik U.</span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li><span class="nm">Liam H.</span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li><span class="nm">Sven</span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li class="heute"><span class="nm">Bastian S. <span class="mk">(diese Woche dran)</span></span><div class="bar" style="width:67%"></div><span class="n">2×</span></li><li class="heute"><span class="nm">Hannes W. <span class="mk">(diese Woche dran)</span></span><div class="bar" style="width:67%"></div><span class="n">2×</span></li><li><span class="nm">Henri U.</span><div class="bar" style="width:67%"></div><span class="n">2×</span></li><li><span class="nm">Julian O.</span><div class="bar" style="width:67%"></div><span class="n">2×</span></li><li><span class="nm">Louis H.</span><div class="bar" style="width:67%"></div><span class="n">2×</span></li><li><span class="nm">Lucas</span><div class="bar" style="width:67%"></div><span class="n">2×</span></li><li><span class="nm">Marvin K.</span><div class="bar" style="width:67%"></div><span class="n">2×</span></li><li><span class="nm">Michael Z.</span><div class="bar" style="width:67%"></div><span class="n">2×</span></li><li><span class="nm">Nicklas R.</span><div class="bar" style="width:67%"></div><span class="n">2×</span></li><li><span class="nm">Nils B.</span><div class="bar" style="width:67%"></div><span class="n">2×</span></li><li><span class="nm">Patrick S.</span><div class="bar" style="width:67%"></div><span class="n">2×</span></li><li><span class="nm">Justus S.</span><div class="bar" style="width:33%"></div><span class="n">1×</span></li></ul>
+</section>
+<section>
+  <h2>Bisherige Termine</h2>
+  <ul class="hist"><li><span>19.11.2026</span>Bastian E., Bastian S., Hannes W.</li><li><span>14.11.2026 · Heimspiel</span>Henri U., Marvin K., Nils B.</li><li><span>12.11.2026</span>Gianluca S., Jannik U., Justus S., Lucas, Sven</li><li><span>05.11.2026</span>Bastian E., Louis H., Marvin K.</li><li><span>29.10.2026</span>Julian O., Nicklas R., Patrick S.</li><li><span>22.10.2026</span>Janis H., Michael Z., Nils B.</li></ul>
+</section>
+</div>
+</body>
+</html>
