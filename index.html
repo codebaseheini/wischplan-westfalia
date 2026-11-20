@@ -33,15 +33,23 @@
   .mk { color:var(--muted); font-weight:400; }
   .hist li { border-top:1px solid var(--line); padding:.4rem 0; }
   .hist span { color:var(--muted); display:block; font-size:.85rem; }
+  .tcount { margin-top:1rem; }
+  .chips { display:flex; flex-wrap:wrap; gap:.35rem; }
+  .chip { background:var(--card); border-radius:999px; padding:.15rem .6rem; font-size:.85rem; white-space:nowrap; }
+  .chip b { font-weight:600; }
+  .chip.heute { outline:1.5px solid var(--fg); }
 
   /* ---- Grosser Bildschirm: alles auf einer Seite, kein Scrollen ---- */
   @media (min-width:960px) and (min-height:540px) {
     html, body { height:100%; overflow:hidden; }
     .wrap { max-width:none; height:100dvh; padding:2.5vh 2.5vw; display:grid;
             grid-template-columns:minmax(0,1fr) minmax(0,2.2fr) minmax(0,1fr);
-            grid-template-rows:auto minmax(0,1fr); column-gap:2.5vw; row-gap:2vh;
+            grid-template-rows:auto minmax(0,1fr) auto; column-gap:2.5vw; row-gap:2vh;
+            grid-template-areas:"head head head" "dran rank hist" "trik trik trik";
             font-size:clamp(.72rem, 2vh, 1.05rem); }
-    header { grid-column:1 / -1; display:flex; align-items:baseline; gap:1.5rem; }
+    header { grid-area:head; display:flex; align-items:baseline; gap:1.5rem; }
+    .s-dran { grid-area:dran; } .s-rank { grid-area:rank; }
+    .s-hist { grid-area:hist; } .s-trik { grid-area:trik; }
     h1 { font-size:clamp(1.2rem, 4vh, 2rem); }
     .grp h3 { font-size:.95em; margin:0 0 .6vh; }
     .grp + .grp { margin-top:1.6vh; }
@@ -56,6 +64,15 @@
     .rank .nm { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
     .hist { flex:1; min-height:0; overflow:hidden; }
     .hist li { padding:.8vh 0; }
+    .tband { display:flex; gap:2.5vw; align-items:flex-start; min-height:0; }
+    .tpicks { display:flex; flex-wrap:wrap; gap:1.5vw; flex:0 0 auto; }
+    .tpicks .grp { width:max(14rem, 17vw); }
+    .tpicks .grp h3 { white-space:nowrap; }
+    .tpicks .grp + .grp { margin-top:0; }
+    .tpicks .name { font-size:clamp(.9rem, 2.4vh, 1.2rem); padding:.9vh .9vw; margin:0; }
+    .tcount { flex:1; min-width:0; margin-top:0; }
+    .chips { gap:.4vh .5vw; }
+    .chip { font-size:.85em; padding:.1em .6em; }
   }
 </style>
 </head>
@@ -64,24 +81,25 @@
 <header>
   <h1>Maschine fahren</h1>
 </header>
-<section>
+<section class="s-dran">
   <h2>Diese Woche dran</h2>
-  <div class="grp"><h3>Training · Do 19.11.2026</h3>
-<p class="name">Bastian E.</p>
-<p class="name">Bastian S.</p>
-<p class="name">Henri U.</p></div>
-<div class="grp"><h3>Heimspiel · Sa 21.11.2026</h3>
-<p class="name">Louis H.</p>
-<p class="name">Nicklas R.</p>
-<p class="name">Nils B.</p></div>
-
+  <p class="regel">Diese Woche ist niemand dran.</p>
 </section>
-<section>
+<section class="s-trik">
+  <h2>Trikots waschen</h2>
+  <div class="tband">
+    <div class="tpicks"><div class="grp"><h3>Sa 21.11.2026 · Heimspiel</h3>
+<p class="name">Louis H.</p></div>
+</div>
+    <div class="grp tcount"><h3>Wie oft schon gewaschen</h3><div class="chips"><span class="chip heute">Louis H. <b>1×</b></span><span class="chip">Bastian E. <b>0×</b></span><span class="chip">Bastian S. <b>0×</b></span><span class="chip">Gianluca S. <b>0×</b></span><span class="chip">Hannes W. <b>0×</b></span><span class="chip">Henri U. <b>0×</b></span><span class="chip">Janis H. <b>0×</b></span><span class="chip">Jannik U. <b>0×</b></span><span class="chip">Julian O. <b>0×</b></span><span class="chip">Justus S. <b>0×</b></span><span class="chip">Liam H. <b>0×</b></span><span class="chip">Lucas <b>0×</b></span><span class="chip">Marvin K. <b>0×</b></span><span class="chip">Michael Z. <b>0×</b></span><span class="chip">Nicklas R. <b>0×</b></span><span class="chip">Nils B. <b>0×</b></span><span class="chip">Patrick S. <b>0×</b></span><span class="chip">Sven <b>0×</b></span></div></div>
+  </div>
+</section>
+<section class="s-rank">
   <h2>Wie oft schon gewischt</h2>
   <p class="regel">Wer bisher am seltensten gewischt hat, kommt zuerst dran. Bei gleichem Stand entscheidet der Zufall.</p>
-  <ul class="rank" style="--rows:9"><li class="heute"><span class="nm">Bastian E. <span class="mk">(diese Woche dran)</span></span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li><span class="nm">Gianluca S.</span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li class="heute"><span class="nm">Henri U. <span class="mk">(diese Woche dran)</span></span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li><span class="nm">Janis H.</span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li><span class="nm">Jannik U.</span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li><span class="nm">Liam H.</span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li class="heute"><span class="nm">Louis H. <span class="mk">(diese Woche dran)</span></span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li class="heute"><span class="nm">Nicklas R. <span class="mk">(diese Woche dran)</span></span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li class="heute"><span class="nm">Nils B. <span class="mk">(diese Woche dran)</span></span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li><span class="nm">Sven</span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li class="heute"><span class="nm">Bastian S. <span class="mk">(diese Woche dran)</span></span><div class="bar" style="width:67%"></div><span class="n">2×</span></li><li><span class="nm">Julian O.</span><div class="bar" style="width:67%"></div><span class="n">2×</span></li><li><span class="nm">Lucas</span><div class="bar" style="width:67%"></div><span class="n">2×</span></li><li><span class="nm">Marvin K.</span><div class="bar" style="width:67%"></div><span class="n">2×</span></li><li><span class="nm">Michael Z.</span><div class="bar" style="width:67%"></div><span class="n">2×</span></li><li><span class="nm">Patrick S.</span><div class="bar" style="width:67%"></div><span class="n">2×</span></li><li><span class="nm">Hannes W.</span><div class="bar" style="width:33%"></div><span class="n">1×</span></li><li><span class="nm">Justus S.</span><div class="bar" style="width:33%"></div><span class="n">1×</span></li></ul>
+  <ul class="rank" style="--rows:9"><li><span class="nm">Bastian E.</span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li><span class="nm">Gianluca S.</span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li><span class="nm">Henri U.</span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li><span class="nm">Janis H.</span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li><span class="nm">Jannik U.</span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li><span class="nm">Liam H.</span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li><span class="nm">Louis H.</span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li><span class="nm">Nicklas R.</span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li><span class="nm">Nils B.</span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li><span class="nm">Sven</span><div class="bar" style="width:100%"></div><span class="n">3×</span></li><li><span class="nm">Bastian S.</span><div class="bar" style="width:67%"></div><span class="n">2×</span></li><li><span class="nm">Julian O.</span><div class="bar" style="width:67%"></div><span class="n">2×</span></li><li><span class="nm">Lucas</span><div class="bar" style="width:67%"></div><span class="n">2×</span></li><li><span class="nm">Marvin K.</span><div class="bar" style="width:67%"></div><span class="n">2×</span></li><li><span class="nm">Michael Z.</span><div class="bar" style="width:67%"></div><span class="n">2×</span></li><li><span class="nm">Patrick S.</span><div class="bar" style="width:67%"></div><span class="n">2×</span></li><li><span class="nm">Hannes W.</span><div class="bar" style="width:33%"></div><span class="n">1×</span></li><li><span class="nm">Justus S.</span><div class="bar" style="width:33%"></div><span class="n">1×</span></li></ul>
 </section>
-<section>
+<section class="s-hist">
   <h2>Bisherige Termine</h2>
   <ul class="hist"><li><span>21.11.2026 · Heimspiel</span>Louis H., Nicklas R., Nils B.</li><li><span>19.11.2026</span>Bastian E., Bastian S., Henri U.</li><li><span>14.11.2026 · Heimspiel</span>Henri U., Marvin K., Nils B.</li><li><span>12.11.2026</span>Gianluca S., Jannik U., Justus S., Lucas, Sven</li><li><span>05.11.2026</span>Bastian E., Louis H., Marvin K.</li><li><span>29.10.2026</span>Julian O., Nicklas R., Patrick S.</li></ul>
 </section>
